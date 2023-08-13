@@ -21,7 +21,7 @@ public class OrderServiceImp implements OrderService{
     private final OrderRepository orderRepository;
     private final OrderMapper orderMapper;
     private final OrderLineItemsMapper orderLineItemsMapper;
-    private  final WebClient webClient;
+//    private  final WebClient webClient;
     @Override
     public OrderDto placeOrder(OrderDto orderDto) {
 
@@ -37,17 +37,17 @@ public class OrderServiceImp implements OrderService{
 //                .stream()
 //                .map(orderLineItems::getS)
 
-       Boolean result =  webClient.get()
-                .uri("http://localhost:9000/api/inventory")
-                .retrieve()
-                .bodyToMono(Boolean.class)
-                .block();
-       if (result){
-           orderRepository.save(order);
-       }else {
-           throw new IllegalArgumentException("Product is not instock. Please try again later");
-       }
-
+//       Boolean result =  webClient.get()
+//                .uri("http://localhost:9000/api/inventory")
+//                .retrieve()
+//                .bodyToMono(Boolean.class)
+//                .block();
+//       if (result){
+//           orderRepository.save(order);
+//       }else {
+//           throw new IllegalArgumentException("Product is not instock. Please try again later");
+//       }
+        orderRepository.save(order);
         return orderMapper.toDto(order);
     }
 }
